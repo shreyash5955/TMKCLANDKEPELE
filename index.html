@@ -44,6 +44,18 @@
             height: 50px;
             z-index: 2;
         }
+        .timer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 15px;
+            border-radius: 10px;
+            z-index: 2;
+            color: #FFD700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
         .container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -105,10 +117,33 @@
             color: #eee;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .instagram-logo {
+                width: 40px;
+                height: 40px;
+            }
+            .timer {
+                font-size: 1em;
+                padding: 8px 10px;
+            }
+            .container h1 {
+                font-size: 1.5em;
+            }
+            .price {
+                font-size: 1.5em;
+            }
+            button {
+                padding: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram Logo" class="instagram-logo">
+    <div class="timer" id="timer">Offer ends in: 09:00</div>
     <div class="container">
         <h1>Boost Your Instagram</h1>
         <p>Get real followers & verified blue tick at the cheapest price!</p>
@@ -126,5 +161,22 @@
         </form>
         <div class="footer">⚠️ 100% Safe & Secure Services</div>
     </div>
+
+    <script>
+        let timeLeft = 540;
+        const timerElement = document.getElementById('timer');
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `Offer ends in: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (timeLeft > 0) {
+                timeLeft--;
+            } else {
+                timerElement.textContent = "Offer ended!";
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
 </body>
 </html>
